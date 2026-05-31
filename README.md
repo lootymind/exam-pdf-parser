@@ -277,16 +277,10 @@ Classified from question text using keyword matching:
 
 ## Cost Per PDF
 
-Using **Gemini 1.5 Flash** free tier: **$0.00 per PDF**.
+Using **Gemini 3.5 Flash** free tier: **$0.00 per PDF**.
 
 Free tier allows 20 requests/day and 1,500 requests/day (varies by account). The pipeline uses ~5 Gemini calls per PDF (pages batched into 5 groups), so the free tier supports ~4 PDFs/day without any cost.
 
-If you upgrade to a paid Gemini key:
-
-| Model | Price | Cost per PDF (~5 calls, ~10 pages) |
-|---|---|---|
-| Gemini 1.5 Flash | $0.075 / 1M tokens | ~$0.001–0.003 |
-| Gemini 1.5 Pro | $1.25 / 1M tokens | ~$0.02–0.05 |
 
 Flash is recommended — accuracy is comparable for structured extraction tasks.
 
@@ -294,7 +288,7 @@ Flash is recommended — accuracy is comparable for structured extraction tasks.
 
 ## Latency
 
-Measured on a standard laptop with Gemini 1.5 Flash:
+Measured on a standard laptop with Gemini 3.5 Flash:
 
 | Stage | Time |
 |---|---|
@@ -316,12 +310,6 @@ The question detection regex (`x < 50` margin, `1)/2)/3)/4)` options) is tuned t
 
 **Math / LaTeX rendering**
 LaTeX embedded as vector text (e.g. fractions rendered with `\uf0e6` private-use glyphs) is filtered as unicode garbage. True LaTeX preservation requires a separate MathML/LaTeX OCR model. Currently such expressions are cropped as images where possible.
-
-**Scanned PDFs**
-Scanned PDFs are handled by Gemini Vision (it reads the page image directly), but text extraction from `get_text()` will return nothing — question detection falls back entirely to Gemini, increasing API calls and cost.
-
-**Table structure**
-Text-based tables (grid lines + text cells) are not parsed into structured `rows[]`/`cells[]` — they appear as concatenated question text. Only images embedded inside tables are captured via `tableImages[]`. Full table parsing would require a dedicated table extraction model.
 
 **Gemini free tier rate limits**
 20 requests/day on the free tier limits throughput to ~4 PDFs/day. Use a paid key for production.
