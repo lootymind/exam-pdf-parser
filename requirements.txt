@@ -1,0 +1,12 @@
+pymupdf
+pdf2image
+pytesseract
+pillow
+opencv-python
+redis 
+rq
+python-multipart
+boto3
+fastapi
+uvicorn[standard]
+google-generativeai
