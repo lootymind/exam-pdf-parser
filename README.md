@@ -31,7 +31,7 @@ The pipeline runs in two stages:
 - Normalises bounding boxes to a 0–1000 grid as required by the schema
 - Saves each crop to disk and assigns it a public URL via `image_store.py`
 
-**Stage 2 — Gemini 1.5 Flash (vision-based placement)**
+**Stage 2 — Gemini 3.5 Flash (vision-based placement)**
 - Renders each page to PNG at 120 DPI
 - Groups pages into batches (~5 Gemini calls per PDF) to stay within free tier limits
 - Sends each batch of page images + a structured prompt to Gemini
